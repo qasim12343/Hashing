@@ -2,21 +2,40 @@
 sboxes = read_sboxes('sbox.txt')
 
 
-def HashAlgo(plain, subKeys, salt, no_workFactor):
-    pass
+def HashAlgo(plain, keys, salt, no_workFactor):
+    c = workFactor(plain, keys, salt)
+    for _ in range(2**no_workFactor - 1):
+        c = workFactor(c, keys, salt)
 
 
-def workFactor(plain, key, salt):
-    pass
+def workFactor(plain, keys, salt):
+    op1 = box(plain, keys)
+    op2 = int(op1, 2) ^ int(salt, 2)
+    return bin(op2)[2:].zfill(64)
 
 
-def Box(key, plain):
-    pass
+def box(plain, keys):
+    left, right = round(plain[0:32], plain[32:], key[0])
+    for i in range(31):
+        left, right = round(left, right, key[i+1])
+    return lastround(left, right, key[30], key[31])
 
 
 def round(left, right, key):
     op1 = int(left, 2) ^ int(key, 2)
     op2 = int(w(op1), 2) ^ int(right, 2)
+    right = left
+    left = bin(op2)[2:].zfill(32)
+
+    return [left, right]
+
+
+def lastround(left, right, key30, key31):
+    op1 = int(left, 2) ^ int(key30, 2)
+    op2 = int(right, 2) ^ int(key31, 2)
+    left = bin(op2)[2:].zfill(32)
+    right = bin(op1)[2:].zfill(32)
+    return left + right
 
 
 def w(input_32bit):
