@@ -1,0 +1,32 @@
+input>>    
+plaintext: '0xa0a35e8ca7710'
+salt: '0xd62af4866aafe96e'
+work_factor: 13
+
+output>>
+'0x6c9ecb88c7a1f4fd'
+------------------------------------------------------------------------------------
+input>>   
+plaintext: '0xa7710'
+salt: '0x59c394c357335177'
+work_factor: 15
+
+output>>
+'0xeb2da3ee596c65df'
+------------------------------------------------------------------------------------
+input>>  
+plaintext: '0x111111'
+salt: '0x39c6c1e33ec00e2b'
+work_factor: 1
+
+output>>
+'0x5038d070d6e577b0'
+------------------------------------------------------------------------------------
+input>> 
+plaintext: '0x000000000'
+salt: '0x701309b2b76e6e2d'
+work_factor: 1
+
+output>>
+'0x13cac2db8d45d664'
+
